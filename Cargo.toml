@@ -1,0 +1,13 @@
+[package]
+name = "json-sort"
+authors = ["Steve Tolomanov"]
+description = "Sorts connections in Azure Data Studio settings.json files by server name"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1.0.130", features = ["derive"] }
+serde_json = {version = "1.0.96", features = ["preserve_order"] }
+clap = {version = "4.2.4", features = ["derive"]}
