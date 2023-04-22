@@ -39,13 +39,22 @@ fn main() {
         Some(connections) => connections.to_vec(),
         None => panic!("Error connections are not an array"),
     };
+
+    let sort_key: &str = "connectionName";
+
+    for connection in &mut connections {
+        if connection["options"][sort_key].as_str().unwrap().is_empty() {
+            connection["options"][sort_key] = connection["options"]["server"].clone();
+        }
+    };
+
     connections.sort_by(|a: &Value, b: &Value| {
-        let a: &str = match a["options"]["server"].as_str() {
+        let a: &str = match a["options"][sort_key].as_str() {
             Some(a) => a,
             None => panic!("Error 'server' is not a string"),
         };
 
-        let b: &str = match b["options"]["server"].as_str() {
+        let b: &str = match b["options"][sort_key].as_str() {
             Some(b) => b,
             None => panic!("Error 'server' is not a string"),
         };
